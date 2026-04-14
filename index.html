@@ -37,7 +37,9 @@
       background: linear-gradient(135deg, #1a1510 0%, #0f0f0f 50%, #10141a 100%);
       border-bottom: 1px solid var(--border);
       padding: 80px 24px 60px;
-      text-align: center;
+      text-align: left;
+      max-width: 720px;
+      margin: 0 auto;
     }
 
     .hero-badge {
@@ -70,7 +72,7 @@
       font-size: 18px;
       color: var(--text-muted);
       max-width: 560px;
-      margin: 0 auto;
+      margin: 0;
     }
 
     /* Layout */
@@ -80,34 +82,47 @@
       padding: 0 24px;
     }
 
-    /* Progress tracker */
-    .progress-bar {
+    /* Navigation */
+    .nav-bar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(15, 15, 15, 0.9);
+      background: rgba(15, 15, 15, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      padding: 12px 24px;
+      padding: 0 24px;
     }
 
-    .progress-steps {
+    .nav-links {
       display: flex;
-      gap: 4px;
+      gap: 0;
       max-width: 720px;
       margin: 0 auto;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
-    .progress-step {
-      flex: 1;
-      height: 4px;
-      background: var(--surface-2);
-      border-radius: 2px;
-      transition: background 0.3s;
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-link {
+      display: block;
+      padding: 14px 16px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
     }
 
-    .progress-step.active {
-      background: var(--accent);
+    .nav-link:hover {
+      color: var(--text);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
 
     /* Steps */
@@ -208,6 +223,8 @@
       font-size: 14px;
       line-height: 1.6;
       color: var(--text);
+      white-space: pre-wrap;
+      word-break: break-all;
     }
 
     .code-block code {
@@ -275,13 +292,14 @@
       color: var(--text);
     }
 
-    /* Checklist */
-    .checklist {
+    /* Bullet list */
+    .bullet-list {
       list-style: none;
       margin: 16px 0;
+      padding: 0;
     }
 
-    .checklist li {
+    .bullet-list li {
       display: flex;
       align-items: flex-start;
       gap: 12px;
@@ -290,17 +308,17 @@
       color: var(--text-muted);
     }
 
-    .checklist li:last-child {
+    .bullet-list li:last-child {
       border-bottom: none;
     }
 
-    .check-box {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--border);
-      border-radius: 4px;
+    .bullet-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 8px;
     }
 
     /* Options */
@@ -554,22 +572,17 @@
     <p style="margin-top: 16px; font-size: 14px; color: var(--text-muted);">Total setup time: ~45&ndash;60 minutes &bull; Stuck? Email <a href="mailto:samantha.franco@cvshealth.com" style="color: var(--accent); text-decoration: none;">samantha.franco@cvshealth.com</a></p>
   </div>
 
-  <!-- Progress Bar -->
-  <div class="progress-bar">
-    <div class="progress-steps">
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
-      <div class="progress-step"></div>
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <div class="nav-links">
+      <a href="#glossary" class="nav-link">Definitions</a>
+      <a href="#step-0" class="nav-link">Prerequisites</a>
+      <a href="#shortcuts" class="nav-link">Shortcuts</a>
+      <a href="#step-1" class="nav-link">Setup Guide</a>
+      <a href="#reference" class="nav-link">Quick Ref</a>
+      <a href="#troubleshooting" class="nav-link">Help</a>
     </div>
-  </div>
+  </nav>
 
   <div class="container">
 
@@ -632,11 +645,11 @@
         <h2>Before You Start</h2>
       </div>
       <p>Please complete these <strong>before</strong> the setup session &mdash; some of these take time to process:</p>
-      <ul class="checklist">
-        <li><div class="check-box"></div><div>A <strong>Mac</strong> (this guide is written for macOS)</div></li>
-        <li><div class="check-box"></div><div><strong>Python 3</strong> downloaded and installed &mdash; the installer needs it to run (see Step 1)</div></li>
-        <li><div class="check-box"></div><div><strong>Admin permissions</strong> on your laptop to install software (request through your admin portal &mdash; this can take 1&ndash;2 days, so do it now)</div></li>
-        <li><div class="check-box"></div><div>Connected to the <strong>CVS Health network</strong> or VPN (Zscaler or Cisco AnyConnect)</div></li>
+      <ul class="bullet-list">
+        <li><div class="bullet-dot"></div><div>A <strong>Mac</strong> (this guide is written for macOS)</div></li>
+        <li><div class="bullet-dot"></div><div><strong>Python 3</strong> downloaded and installed &mdash; the installer needs it to run (see Step 1)</div></li>
+        <li><div class="bullet-dot"></div><div><strong>Admin permissions</strong> on your laptop to install software (request through your admin portal &mdash; this can take 1&ndash;2 days, so do it now)</div></li>
+        <li><div class="bullet-dot"></div><div>Connected to the <strong>CVS Health network</strong> or VPN (Zscaler or Cisco AnyConnect)</div></li>
       </ul>
 
       <div class="callout warning">
@@ -1131,15 +1144,15 @@ showing the user login flow</code></pre>
   <!-- Footer -->
   <div class="footer">
     <p>Full install docs: <a href="https://cvscode.prod.cvshealth.com/install">cvscode.prod.cvshealth.com/install</a></p>
-    <p style="margin-top: 12px;"><strong style="color: var(--text);">Stuck or have questions?</strong></p>
-    <p style="margin-top: 4px;">Email Samantha: <a href="mailto:samantha.franco@cvshealth.com">samantha.franco@cvshealth.com</a></p>
+    <p style="margin-top: 16px;"><strong style="color: var(--text);">Stuck or have questions?</strong></p>
+    <p style="margin-top: 4px;">Send Samantha a message on <strong style="color: var(--text);">Teams</strong> or <strong style="color: var(--text);">Slack</strong>, or email <a href="mailto:samantha.franco@cvshealth.com">samantha.franco@cvshealth.com</a></p>
   </div>
 
   <script>
-    // Copy button
+    // Copy button — strips HTML tags and extra whitespace
     function copyCode(btn) {
       const code = btn.closest('.code-block').querySelector('code');
-      const text = code.innerText;
+      const text = code.textContent.trim();
       navigator.clipboard.writeText(text).then(() => {
         btn.textContent = 'Copied!';
         btn.classList.add('copied');
@@ -1159,27 +1172,46 @@ showing the user login flow</code></pre>
       document.getElementById('option-' + id).classList.add('active');
     }
 
-    // Progress bar
-    const steps = document.querySelectorAll('.step');
-    const progressSteps = document.querySelectorAll('.progress-step');
+    // Active nav link highlighting on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    function updateProgress() {
-      const scrollPos = window.scrollY + window.innerHeight * 0.4;
-      let activeCount = 0;
+    function updateNav() {
+      const scrollPos = window.scrollY + 100;
+      let currentId = '';
 
-      steps.forEach((step, i) => {
-        if (step.offsetTop < scrollPos) {
-          activeCount = i + 1;
+      sections.forEach(section => {
+        if (section.offsetTop <= scrollPos) {
+          currentId = section.id;
         }
       });
 
-      progressSteps.forEach((ps, i) => {
-        ps.classList.toggle('active', i < activeCount);
+      // Map section IDs to nav hrefs
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href').substring(1);
+        // "Setup Guide" link covers steps 1-8
+        if (href === 'step-1' && currentId.match(/^step-[1-8]$/)) {
+          link.classList.add('active');
+        } else if (href === currentId) {
+          link.classList.add('active');
+        }
       });
     }
 
-    window.addEventListener('scroll', updateProgress);
-    updateProgress();
+    window.addEventListener('scroll', updateNav);
+    updateNav();
+
+    // Smooth scroll for nav links
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   </script>
 
 </body>
