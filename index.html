@@ -566,11 +566,11 @@
       <ul class="bl" role="list">
         <li role="listitem"><span class="dot" aria-hidden="true"></span><div>A <strong>Mac</strong> (this guide is written for macOS)</div></li>
         <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>Python 3</strong> downloaded and installed — the installer needs it to run (see Step 1)</div></li>
-        <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>Admin permissions</strong> on your laptop to install software (request through your admin portal — this can take 1–2 days, so do it now)</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>Admin permissions</strong> on your laptop to install software (<a href="https://aetna.tuebora.com/home" style="color: var(--accent);">request admin access here</a> — this can take 1–2 days, so do it now)</div></li>
         <li role="listitem"><span class="dot" aria-hidden="true"></span><div>Connected to the <strong>CVS Health network</strong> or VPN (Zscaler or Cisco AnyConnect)</div></li>
       </ul>
       <div class="callout warn">
-        <strong>Don't skip the admin request!</strong> Without admin permissions, the installer will fail. Submit your request now so it's approved by the session. If you're not sure whether you have admin access, try installing any app — if it asks for a password you don't have, you need to request it.
+        <strong>Don't skip the admin request!</strong> Without admin permissions, the installer will fail. <a href="https://aetna.tuebora.com/home" style="color: var(--red); text-decoration: underline;">Request admin access here</a> now so it's approved by the session. If you're not sure whether you have admin access, try installing any app — if it asks for a password you don't have, you need to request it.
       </div>
     </section>
 
@@ -746,6 +746,17 @@
         <pre aria-labelledby="cl-13"><code>/plugins</code></pre>
       </div>
       <p>Look for <strong>figma</strong> in the list and enable it. You're all set!</p>
+
+      <!-- How to start Claude again -->
+      <div style="margin-top: 40px; padding: 24px; background: var(--accent-dim); border: 1px solid rgba(212,165,116,0.3); border-radius: 10px;">
+        <h3 style="margin: 0 0 10px; color: var(--accent);">How to Start Claude Again Later</h3>
+        <p>Once everything is set up, open Terminal any time and run this command to start working with Claude:</p>
+        <div class="code-block">
+          <div class="code-label"><span id="cl-start">Terminal</span><button class="copy-btn" aria-label="Copy command to start Claude" onclick="copyCode(this)">Copy</button></div>
+          <pre aria-labelledby="cl-start"><code>cd ~/Desktop/MCP && claude</code></pre>
+        </div>
+        <p style="margin-bottom: 0;">That's it — two commands chained together. The first navigates to your MCP folder, the second launches Claude with Figma connected.</p>
+      </div>
     </section>
 
     <!-- KEYBOARD SHORTCUTS -->
@@ -1050,7 +1061,7 @@ our pharmacy app</code></pre></div>
           <span class="acc-err">"Permission denied"</span>
         </button>
         <div class="acc-body" id="acc-6" hidden>
-          <p>You need admin permissions on your machine. Request them through your company admin portal, then try again.</p>
+          <p>You need admin permissions on your machine. <a href="https://aetna.tuebora.com/home" style="color: var(--accent);">Request admin access here</a>, then try again.</p>
         </div>
       </div>
     </section>
