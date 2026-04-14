@@ -592,14 +592,36 @@
         <pre aria-labelledby="cl-1"><code>python3 --version</code></pre>
       </div>
       <p>If you see a version number like <code class="il">Python 3.x.x</code>, you already have it — skip to Step 2!</p>
-      <p>If you see an error, install it with Homebrew (a tool that downloads software via Terminal):</p>
-      <div class="code-block">
-        <div class="code-label"><span id="cl-2">Terminal</span><button class="copy-btn" aria-label="Copy terminal command: brew install python3" onclick="copyCode(this)">Copy</button></div>
-        <pre aria-labelledby="cl-2"><code>brew install python3</code></pre>
+      <p>If you see an error or "command not found", you need to install Python. Pick whichever option works for you:</p>
+
+      <div class="tabs" role="tablist" aria-label="Python install methods">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tp-py-download" id="tab-py-download" onclick="switchTab(this, 'tp-py-download')">Download from Website (recommended)</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tp-py-terminal" id="tab-py-terminal" tabindex="-1" onclick="switchTab(this, 'tp-py-terminal')">Install via Terminal</button>
       </div>
-      <div class="callout info">
-        <strong>Don't have Homebrew either?</strong> Install it first by pasting this into Terminal, then close and reopen Terminal before running the brew command above:<br><br>
-        <code class="il">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
+
+      <div id="tp-py-download" role="tabpanel" aria-labelledby="tab-py-download" aria-hidden="false">
+        <p>This is the easiest option and avoids any security blocks you might hit in Terminal:</p>
+        <ol style="padding-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+          <li style="margin-bottom: 8px;">Go to <a href="https://www.python.org/downloads/" style="color: var(--accent);">python.org/downloads</a></li>
+          <li style="margin-bottom: 8px;">Click the big yellow <strong style="color: var(--text);">"Download Python 3.x.x"</strong> button</li>
+          <li style="margin-bottom: 8px;">Open the downloaded <code class="il">.pkg</code> file and follow the installer prompts (click Continue/Agree/Install)</li>
+          <li>When it's done, close and reopen Terminal, then run <code class="il">python3 --version</code> to verify</li>
+        </ol>
+      </div>
+
+      <div id="tp-py-terminal" role="tabpanel" aria-labelledby="tab-py-terminal" aria-hidden="true" hidden>
+        <p>If you have Homebrew installed, you can install Python via Terminal:</p>
+        <div class="code-block">
+          <div class="code-label"><span id="cl-2">Terminal</span><button class="copy-btn" aria-label="Copy terminal command: brew install python3" onclick="copyCode(this)">Copy</button></div>
+          <pre aria-labelledby="cl-2"><code>brew install python3</code></pre>
+        </div>
+        <div class="callout info">
+          <strong>Don't have Homebrew either?</strong> Install it first by pasting this into Terminal, then close and reopen Terminal before running the brew command above:<br><br>
+          <code class="il">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
+        </div>
+        <div class="callout warn">
+          <strong>Getting a security error?</strong> Some machines block Terminal installs. Use the "Download from Website" option instead — it's the same Python, just installed through a regular Mac installer.
+        </div>
       </div>
 
       <!-- Step 2 -->
