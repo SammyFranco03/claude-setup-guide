@@ -1029,6 +1029,28 @@ our pharmacy app</code></pre></div>
       </div>
 
       <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="acc-brew" onclick="toggleAcc(this)">
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+          <span>Missing tools (Node, Python, gcloud, etc.)</span>
+        </button>
+        <div class="acc-body" id="acc-brew" hidden>
+          <p>Homebrew is the Mac app store for Terminal — it helps install things like Python, NPM, gcloud, and more. Once you have Homebrew installed, there's a simple <code class="il">brew install</code> command for each tool you need:</p>
+          <div class="code-block">
+            <div class="code-label"><span>Terminal</span><button class="copy-btn" aria-label="Copy brew install commands" onclick="copyCode(this)">Copy</button></div>
+            <pre><code>brew install node
+brew install python
+brew install --cask google-cloud-sdk</code></pre>
+          </div>
+          <p>Run whichever ones you need. If you don't have Homebrew yet, install it first:</p>
+          <div class="code-block">
+            <div class="code-label"><span>Terminal</span><button class="copy-btn" aria-label="Copy Homebrew install command" onclick="copyCode(this)">Copy</button></div>
+            <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+          </div>
+          <p>Then close and reopen Terminal before running the <code class="il">brew install</code> commands above.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
         <button class="acc-btn" aria-expanded="false" aria-controls="acc-4" onclick="toggleAcc(this)">
           <span class="acc-arrow" aria-hidden="true">▶</span>
           <span>Figma MCP not connecting</span>
