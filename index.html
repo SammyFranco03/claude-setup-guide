@@ -705,46 +705,12 @@
         <h3>Add the Figma MCP Server</h3>
       </div>
       <p class="time-est">~1 minute</p>
-      <p>This is the magic step — it lets Claude see and interact with your Figma files. Pick whichever method you prefer:</p>
-
-      <div class="tabs" role="tablist" aria-label="Figma MCP install methods">
-        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tp-easy" id="tab-easy" onclick="switchTab(this, 'tp-easy')">One Command (easiest)</button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tp-config" id="tab-config" tabindex="-1" onclick="switchTab(this, 'tp-config')">Config File</button>
+      <p>This is the magic step — it lets Claude see and interact with your Figma files. Run this single command in your Terminal:</p>
+      <div class="code-block">
+        <div class="code-label"><span id="cl-10">Terminal</span><button class="copy-btn" aria-label="Copy Figma MCP command" onclick="copyCode(this)">Copy</button></div>
+        <pre aria-labelledby="cl-10"><code>claude mcp add --transport http figma https://mcp.figma.com/</code></pre>
       </div>
-
-      <div id="tp-easy" role="tabpanel" aria-labelledby="tab-easy" aria-hidden="false">
-        <p>While Claude Code is running, paste this single command:</p>
-        <div class="code-block">
-          <div class="code-label"><span id="cl-10">Inside Claude</span><button class="copy-btn" aria-label="Copy Figma MCP command" onclick="copyCode(this)">Copy</button></div>
-          <pre aria-labelledby="cl-10"><code>/mcp add figma --transport http --url https://mcp.figma.com/mcp</code></pre>
-        </div>
-        <p>That's it. One line and Figma is connected.</p>
-      </div>
-
-      <div id="tp-config" role="tabpanel" aria-labelledby="tab-config" aria-hidden="true" hidden>
-        <p>Open your settings file in Terminal:</p>
-        <div class="code-block">
-          <div class="code-label"><span id="cl-11">Terminal</span><button class="copy-btn" aria-label="Copy open settings command" onclick="copyCode(this)">Copy</button></div>
-          <pre aria-labelledby="cl-11"><code>open -a TextEdit ~/.claude/settings.json</code></pre>
-        </div>
-        <p>Find or add a <code class="il">"projects"</code> section and include the Figma MCP server:</p>
-        <div class="code-block">
-          <div class="code-label"><span id="cl-12">Add to settings.json</span><button class="copy-btn" aria-label="Copy JSON config snippet" onclick="copyCode(this)">Copy</button></div>
-          <pre aria-labelledby="cl-12"><code>"projects": {
-  "/Users/YOUR_USERNAME": {
-    "mcpServers": {
-      "figma": {
-        "type": "http",
-        "url": "https://mcp.figma.com/mcp"
-      }
-    }
-  }
-}</code></pre>
-        </div>
-        <div class="callout warn">
-          <strong>Important:</strong> Replace <code class="il">/Users/YOUR_USERNAME</code> with your actual home directory. Find it by running <code class="il">echo $HOME</code> in Terminal.
-        </div>
-      </div>
+      <p>That's it. One line and Figma is connected.</p>
 
       <!-- Step 7 -->
       <div class="step-header" id="step-7">
