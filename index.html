@@ -1096,7 +1096,12 @@ brew install --cask google-cloud-sdk</code></pre>
           <p>The <code class="il">cvs/tools/nodejs</code> formula only ships the <code class="il">node</code> binary without <code class="il">node_modules/npm/</code>. <strong>Workaround:</strong> use <strong>bun</strong> as your package manager instead — <code class="il">claude-code</code> and <code class="il">codex</code> are already installed via bun.</p>
 
           <h3 style="margin-top: 16px;">gcloud (gcloud formula)</h3>
-          <p>The <code class="il">cvs/tools/gcloud</code> formula only ships the shell wrapper without <code class="il">lib/gcloud.py</code> and the rest of the SDK. <strong>No workaround</strong> — the entire SDK is missing from the formula. You'll need to install via the self-service app store:</p>
+          <p>The <code class="il">cvs/tools/gcloud</code> formula only ships the shell wrapper without <code class="il">lib/gcloud.py</code> and the rest of the SDK. <strong>Workaround:</strong> if you have Homebrew installed, you can install gcloud this way:</p>
+          <div class="code-block">
+            <div class="code-label"><span>Terminal</span><button class="copy-btn" aria-label="Copy brew install gcloud command" onclick="copyCode(this)">Copy</button></div>
+            <pre><code>brew install --cask google-cloud-sdk</code></pre>
+          </div>
+          <p>Alternatively, install via the self-service app store:</p>
           <p><a href="https://colleaguezone.cvs.com/cz?id=cz_taxonomy_topic&topic_id=42d49d623bc9a2904f812964c3e45a8c&in_context=true" style="color: var(--accent);">Mac: Self-Service App Store (ColleagueZone)</a></p>
 
           <div class="callout warn" style="margin-top: 16px;">
