@@ -1083,6 +1083,28 @@ brew install --cask google-cloud-sdk</code></pre>
           <p>You need admin permissions on your machine. <a href="https://aetna.tuebora.com/home" style="color: var(--accent);">Request admin access here</a>, then try again.</p>
         </div>
       </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="acc-aip" onclick="toggleAcc(this)">
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+          <span>Known Issues: npm &amp; gcloud AIP formula bugs</span>
+        </button>
+        <div class="acc-body" id="acc-aip" hidden>
+          <p>The CVS AIP brew formulas for <strong>npm</strong> and <strong>gcloud</strong> have incomplete installs — their <code class="il">lib/</code> directories are missing.</p>
+
+          <h3 style="margin-top: 16px;">npm (nodejs formula)</h3>
+          <p>The <code class="il">cvs/tools/nodejs</code> formula only ships the <code class="il">node</code> binary without <code class="il">node_modules/npm/</code>. <strong>Workaround:</strong> use <strong>bun</strong> as your package manager instead — <code class="il">claude-code</code> and <code class="il">codex</code> are already installed via bun.</p>
+
+          <h3 style="margin-top: 16px;">gcloud (gcloud formula)</h3>
+          <p>The <code class="il">cvs/tools/gcloud</code> formula only ships the shell wrapper without <code class="il">lib/gcloud.py</code> and the rest of the SDK. <strong>No workaround</strong> — the entire SDK is missing from the formula. You'll need to install via the self-service app store:</p>
+          <p><a href="https://colleaguezone.cvs.com/cz?id=cz_taxonomy_topic&topic_id=42d49d623bc9a2904f812964c3e45a8c&in_context=true" style="color: var(--accent);">Mac: Self-Service App Store (ColleagueZone)</a></p>
+
+          <div class="callout warn" style="margin-top: 16px;">
+            <strong>Report these formula bugs</strong><br>
+            Reach out to the <strong>AIP team (AI Platform / EDAP)</strong> to report that the <code class="il">cvs/tools/nodejs</code> and <code class="il">cvs/tools/gcloud</code> brew formulas are incomplete — both are missing their <code class="il">lib/</code> directories.
+          </div>
+        </div>
+      </div>
     </section>
 
   </div><!-- .container -->
