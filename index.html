@@ -994,12 +994,22 @@ our pharmacy app</code></pre></div>
           <span class="acc-err">"claude: command not found"</span>
         </button>
         <div class="acc-body" id="acc-2" hidden>
-          <p>Claude Code may not have installed correctly. Try running:</p>
+          <p>Claude Code may not have installed correctly. Once you have Homebrew installed, you can install the missing components — Claude Code needs NPM (Node.js) installed first:</p>
+          <p><strong>1. Install Node.js (includes NPM):</strong></p>
+          <div class="code-block">
+            <div class="code-label"><span>Terminal</span><button class="copy-btn" aria-label="Copy brew install node command" onclick="copyCode(this)">Copy</button></div>
+            <pre><code>brew install node</code></pre>
+          </div>
+          <p><strong>2. Install Claude Code via NPM:</strong></p>
           <div class="code-block">
             <div class="code-label"><span>Terminal</span><button class="copy-btn" aria-label="Copy npm install command" onclick="copyCode(this)">Copy</button></div>
             <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
           </div>
           <p>Then close and reopen Terminal.</p>
+          <div class="callout info">
+            <strong>Don't have Homebrew?</strong> Install it first by pasting this into Terminal:<br><br>
+            <code class="il">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
+          </div>
         </div>
       </div>
 
