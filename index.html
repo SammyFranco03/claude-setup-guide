@@ -580,52 +580,6 @@
       <!-- Step 1 -->
       <div class="step-header" id="step-1">
         <span class="step-num" aria-hidden="true">1</span>
-        <h3>Install Python 3</h3>
-      </div>
-      <p class="time-est">~5 minutes</p>
-      <p>Terminal is a text-based app on your Mac where you type commands instead of clicking buttons. Think of it like a chat window, but for talking to your computer.</p>
-      <p>Open it now: press <kbd>⌘ Cmd</kbd> + <kbd>Space</kbd> to open Spotlight, type <strong>"Terminal"</strong>, and hit Enter. A window with a blinking cursor will appear — that's your terminal.</p>
-      <p>First, let's check if Python is already on your machine:</p>
-      <div class="code-block">
-        <div class="code-label"><span id="cl-1">Terminal</span><button class="copy-btn" aria-label="Copy terminal command: python3 --version" onclick="copyCode(this)">Copy</button></div>
-        <pre aria-labelledby="cl-1"><code>python3 --version</code></pre>
-      </div>
-      <p>If you see a version number like <code class="il">Python 3.x.x</code>, you already have it — skip to Step 2!</p>
-      <p>If you see an error or "command not found", you need to install Python. Pick whichever option works for you:</p>
-
-      <div class="tabs" role="tablist" aria-label="Python install methods">
-        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tp-py-download" id="tab-py-download" onclick="switchTab(this, 'tp-py-download')">Download from Website (recommended)</button>
-        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tp-py-terminal" id="tab-py-terminal" tabindex="-1" onclick="switchTab(this, 'tp-py-terminal')">Install via Terminal</button>
-      </div>
-
-      <div id="tp-py-download" role="tabpanel" aria-labelledby="tab-py-download" aria-hidden="false">
-        <p>This is the easiest option and avoids any security blocks you might hit in Terminal:</p>
-        <ol style="padding-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
-          <li style="margin-bottom: 8px;">Go to <a href="https://www.python.org/downloads/" style="color: var(--accent);">python.org/downloads</a></li>
-          <li style="margin-bottom: 8px;">Click the big yellow <strong style="color: var(--text);">"Download Python 3.x.x"</strong> button</li>
-          <li style="margin-bottom: 8px;">Open the downloaded <code class="il">.pkg</code> file and follow the installer prompts (click Continue/Agree/Install)</li>
-          <li>When it's done, close and reopen Terminal, then run <code class="il">python3 --version</code> to verify</li>
-        </ol>
-      </div>
-
-      <div id="tp-py-terminal" role="tabpanel" aria-labelledby="tab-py-terminal" aria-hidden="true" hidden>
-        <p>If you have Homebrew installed, you can install Python via Terminal:</p>
-        <div class="code-block">
-          <div class="code-label"><span id="cl-2">Terminal</span><button class="copy-btn" aria-label="Copy terminal command: brew install python3" onclick="copyCode(this)">Copy</button></div>
-          <pre aria-labelledby="cl-2"><code>brew install python3</code></pre>
-        </div>
-        <div class="callout info">
-          <strong>Don't have Homebrew either?</strong> Install it first by pasting this into Terminal, then close and reopen Terminal before running the brew command above:<br><br>
-          <code class="il">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
-        </div>
-        <div class="callout warn">
-          <strong>Getting a security error?</strong> Some machines block Terminal installs. Use the "Download from Website" option instead — it's the same Python, just installed through a regular Mac installer.
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="step-header" id="step-2">
-        <span class="step-num" aria-hidden="true">2</span>
         <h3>Install CVS Code</h3>
       </div>
       <p class="time-est">~5 minutes to download</p>
@@ -638,9 +592,9 @@
         <strong>Important:</strong> Use your <strong>machine's Terminal app</strong>, not VS Code's built-in terminal or any embedded shell. The installer may not work correctly in those.
       </div>
 
-      <!-- Step 3 -->
-      <div class="step-header" id="step-3">
-        <span class="step-num" aria-hidden="true">3</span>
+      <!-- Step 2 -->
+      <div class="step-header" id="step-2">
+        <span class="step-num" aria-hidden="true">2</span>
         <h3>Update Your PATH</h3>
       </div>
       <p class="time-est">~2 minutes</p>
@@ -658,9 +612,9 @@
       </div>
       <p>You should see a version number. If you see "command not found", close and reopen Terminal again.</p>
 
-      <!-- Step 4 -->
-      <div class="step-header" id="step-4">
-        <span class="step-num" aria-hidden="true">4</span>
+      <!-- Step 3 -->
+      <div class="step-header" id="step-3">
+        <span class="step-num" aria-hidden="true">3</span>
         <h3>Run the Environment Setup</h3>
       </div>
       <p class="time-est">~15–30 minutes (grab a coffee!)</p>
@@ -678,9 +632,9 @@
         <strong>This takes 15–30 minutes.</strong> The setup process will install several tools. Retry cycles are normal — let it run and don't close the terminal.
       </div>
 
-      <!-- Step 5 -->
-      <div class="step-header" id="step-5">
-        <span class="step-num" aria-hidden="true">5</span>
+      <!-- Step 4 -->
+      <div class="step-header" id="step-4">
+        <span class="step-num" aria-hidden="true">4</span>
         <h3>Sync Skills &amp; Launch Claude Code</h3>
       </div>
       <p class="time-est">~2 minutes</p>
@@ -699,31 +653,31 @@
         <strong>Next time you want to use Claude Code</strong>, just open Terminal, type <code class="il">claude</code>, and press Enter.
       </div>
 
-      <!-- Step 6 -->
-      <div class="step-header" id="step-6">
-        <span class="step-num" aria-hidden="true">6</span>
+      <!-- Step 5 -->
+      <div class="step-header" id="step-5">
+        <span class="step-num" aria-hidden="true">5</span>
         <h3>Add the Figma MCP Server</h3>
       </div>
       <p class="time-est">~1 minute</p>
       <p>This is the magic step — it lets Claude see and interact with your Figma files. Run this single command in your Terminal:</p>
       <div class="code-block">
         <div class="code-label"><span id="cl-10">Terminal</span><button class="copy-btn" aria-label="Copy Figma MCP command" onclick="copyCode(this)">Copy</button></div>
-        <pre aria-labelledby="cl-10"><code>claude mcp add --transport http figma https://mcp.figma.com/</code></pre>
+        <pre aria-labelledby="cl-10"><code>claude mcp add --transport http figma https://mcp.figma.com/mcp</code></pre>
       </div>
       <p>That's it. One line and Figma is connected.</p>
 
-      <!-- Step 7 -->
-      <div class="step-header" id="step-7">
-        <span class="step-num" aria-hidden="true">7</span>
+      <!-- Step 6 -->
+      <div class="step-header" id="step-6">
+        <span class="step-num" aria-hidden="true">6</span>
         <h3>Authenticate with Figma</h3>
       </div>
       <p class="time-est">~1 minute</p>
       <p>The first time you use a Figma command, Claude will pop open your web browser and ask you to log into Figma. Just sign in like normal and click "Allow" to authorize the connection. This only happens once.</p>
       <p>To test it, paste a real Figma URL from one of your files and ask Claude about it.</p>
 
-      <!-- Step 8 -->
-      <div class="step-header" id="step-8">
-        <span class="step-num" aria-hidden="true">8</span>
+      <!-- Step 7 -->
+      <div class="step-header" id="step-7">
+        <span class="step-num" aria-hidden="true">7</span>
         <h3>Enable the Figma Plugin</h3>
       </div>
       <p class="time-est">~1 minute</p>
