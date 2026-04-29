@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude Code + Figma MCP Setup Guide</title>
+  <title>Designer's Field Guide: From Vibe Code to Live AI Prototype</title>
   <style>
     :root {
       --bg: #ffffff;
@@ -531,11 +531,16 @@
 
 <!-- Sidebar Nav -->
 <nav class="sidebar" aria-label="Page sections">
-  <div class="sidebar-title">Claude Code + Figma</div>
+  <div class="sidebar-title">Designer's Field Guide</div>
 
   <div class="nav-group-label">Get Started</div>
   <a href="#prerequisites" class="nav-link">Prerequisites</a>
   <a href="#setup" class="nav-link">Setup Guide</a>
+
+  <div class="nav-group-label">Build a POC</div>
+  <a href="#why" class="nav-link">Why Build a Prototype</a>
+  <a href="#build" class="nav-link">Build Your AI POC</a>
+  <a href="#deploy" class="nav-link">Deploy to CAP</a>
 
   <div class="nav-group-label">Reference</div>
   <a href="#shortcuts" class="nav-link">Keyboard Shortcuts</a>
@@ -551,9 +556,9 @@
 <div class="main" id="main-content">
 
   <header>
-    <h1>Claude Code + Figma MCP Setup Guide</h1>
-    <p>Get Claude running in your terminal so it can read your Figma files, generate code from your designs, and create diagrams — no coding experience required.</p>
-    <p class="contact-line">Total setup time: ~45–60 min · Stuck? Message Samantha on <strong>Teams</strong> or <strong>Slack</strong>, or email <a href="mailto:samantha.franco@cvshealth.com">samantha.franco@cvshealth.com</a></p>
+    <h1>Designer's Field Guide: From Vibe Code to Live AI Prototype</h1>
+    <p>Get Claude running in your terminal, connect it to Figma, build an AI-powered POC, and deploy it to a real cloud environment — no engineering background required.</p>
+    <p class="contact-line">Setup time: ~45–60 min · Questions? Message Samantha on <strong>Teams</strong> or <strong>Slack</strong>, or email <a href="mailto:samantha.franco@cvshealth.com">samantha.franco@cvshealth.com</a></p>
   </header>
 
   <div class="container">
@@ -698,6 +703,167 @@
         </div>
         <p style="margin-bottom: 0;">That's it — two commands chained together. The first navigates to your MCP folder, the second launches Claude with Figma connected.</p>
       </div>
+    </section>
+
+    <!-- WHY BUILD A PROTOTYPE -->
+    <section class="section" id="why">
+      <h2>Why Build a Live AI Prototype</h2>
+      <p>Figma handles static screens. Voiceflow handles agent logic. Neither shows how UI changes in real time based on LLM output. A live prototype fills that gap.</p>
+      <div class="cards">
+        <div class="card">
+          <h4>Real LLM Interactions</h4>
+          <p>See how the agent responds probabilistically — not scripted click-throughs, but actual AI-generated UI in the moment.</p>
+        </div>
+        <div class="card">
+          <h4>Real User Testing</h4>
+          <p>Share a live link with users inside or outside CVS Health, not a Figma prototype limited to pre-set flows.</p>
+        </div>
+        <div class="card">
+          <h4>UX Ownership of Prompting</h4>
+          <p>Establish a design perspective on how AI agents should behave — before engineering builds it their way.</p>
+        </div>
+        <div class="card">
+          <h4>Faster Engineering Handoff</h4>
+          <p>Hand off working code instead of specs. CAP deployment can reduce infrastructure setup from months to minutes.</p>
+        </div>
+      </div>
+      <div class="callout info">
+        <strong>Real example:</strong> Joe Lowmiller on the Health 100 team vibe-coded a full health agent prototype (Heyo) — complete with rich UI components, a modular prompting system, and fake patient data — then deployed it to CAP for internal user testing. All built without a dedicated engineering sprint.
+      </div>
+    </section>
+
+    <!-- BUILD YOUR AI POC -->
+    <section class="section" id="build">
+      <h2>Build Your AI POC</h2>
+
+      <h3>Tools Overview</h3>
+      <table class="ref-table">
+        <thead><tr><th>Tool</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Claude</strong> (in VS Code)</td><td>Vibe code your app, generate fake data, iterate on prompts</td></tr>
+          <tr><td><strong>CVS Code</strong></td><td>Claude-powered CLI with CVS infrastructure knowledge; use for deployment steps</td></tr>
+          <tr><td><strong>GitHub Enterprise</strong></td><td>Store your source code — required for CAP deployment</td></tr>
+          <tr><td><strong>Hyperion Gateway</strong></td><td>CVS's internal Claude API — no manual key setup needed</td></tr>
+          <tr><td><strong>CAP</strong></td><td>Deploy your app to the cloud and share a link</td></tr>
+          <tr><td><strong>Artifactory / JFrog</strong></td><td>Stores your container image — handled automatically by CI/CD, not you</td></tr>
+        </tbody>
+      </table>
+
+      <div class="step-header" style="margin-top: 36px;" id="build-step-1">
+        <span class="step-num" aria-hidden="true">1</span>
+        <h3>Vibe Code Your App</h3>
+      </div>
+      <p>Open VS Code with Claude and describe what you want in plain English. Start with one workflow, not the whole product.</p>
+      <div class="code-block">
+        <div class="code-label"><span>Example prompt</span></div>
+        <pre><code>Build a React frontend showing a health chat agent. It should respond
+with UI components (quick replies, suggested pills, structured cards)
+based on Claude's output. Use the Hyperion Gateway as the AI backend.</code></pre>
+      </div>
+      <div class="callout">
+        <strong>Tip:</strong> Ask Claude to build a modular prompting system so the agent adapts per context — patient profile, intent domain, conversation history. Each Claude response is a starting point, not a final answer. Iterate.
+      </div>
+
+      <div class="step-header" style="margin-top: 36px;" id="build-step-2">
+        <span class="step-num" aria-hidden="true">2</span>
+        <h3>Generate Fake Data</h3>
+      </div>
+      <p>Ask Claude to create realistic test data as JSON files — no backend required. You can iterate to add edge cases.</p>
+      <div class="code-block">
+        <div class="code-label"><span>Example prompt</span></div>
+        <pre><code>Create 3–4 patient profiles with different conditions, recent
+appointments, and saved preferences. Store them as JSON so the app
+can load different profiles for testing.</code></pre>
+      </div>
+      <p>To add more cases:</p>
+      <div class="code-block">
+        <div class="code-label"><span>Example prompt</span></div>
+        <pre><code>Add a patient who is younger, has no chronic conditions,
+and has only had one appointment in the past year.</code></pre>
+      </div>
+
+      <div class="step-header" style="margin-top: 36px;" id="build-step-3">
+        <span class="step-num" aria-hidden="true">3</span>
+        <h3>Connect to Claude via Hyperion Gateway</h3>
+      </div>
+      <p>Hyperion Gateway is the approved internal path to Claude at CVS Health. It generates an API key automatically — no manual credential setup required.</p>
+      <ul class="bl" role="list">
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div>Ask CVS Code: <em>"What AI backends do we have available for a web app I want to deploy?"</em> — it will guide you to Hyperion Gateway.</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div>Or go to <strong>User Settings → settings.json</strong> inside CVS Code — the Hyperion URL and key are listed there.</div></li>
+      </ul>
+      <div class="callout warn">
+        <strong>Watch out:</strong> If Claude tells you to manually create Anthropic, Gemini, or Artifactory credentials — stop. Use Hyperion Gateway instead. You cannot manually push to Artifactory; the CI pipeline handles that automatically.
+      </div>
+    </section>
+
+    <!-- DEPLOY TO CAP -->
+    <section class="section" id="deploy">
+      <h2>Deploy to CAP</h2>
+      <p>CAP (Cloud Application Platform) deploys your app to a real cloud environment so you can share a link. It's available to all CVS Health employees from day one — no ServiceNow tickets, no email approvals.</p>
+
+      <h3>Prerequisites for Deployment</h3>
+      <ul class="bl" role="list">
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>GitHub Enterprise access</strong> — your code must live in CVS's GitHub Enterprise instance</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>A containerized app with CI/CD</strong> — use CAP's Quick Start to scaffold this automatically (you don't need to know what that means)</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>A CAP login</strong> — go to the CAP URL and verify you have access; everyone does from day one</div></li>
+      </ul>
+
+      <h3 style="margin-top: 32px;">How to Deploy</h3>
+      <div class="tabs" role="tablist">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="deploy-tab-a" tabindex="0" onclick="switchTab(this,'deploy-tab-a')">Option A: CVS Code (recommended)</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="deploy-tab-b" tabindex="-1" onclick="switchTab(this,'deploy-tab-b')">Option B: CAP UI</button>
+      </div>
+
+      <div id="deploy-tab-a" role="tabpanel" aria-hidden="false">
+        <p>In CVS Code, type:</p>
+        <div class="code-block">
+          <div class="code-label"><span>Inside CVS Code</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+          <pre><code>I want to deploy my app to CAP.
+Here is the latest commit hash: [hash]</code></pre>
+        </div>
+        <p>CVS Code knows the infrastructure and handles the deployment. If you don't know your commit hash, ask Claude: <code class="il">What is my latest git commit hash?</code></p>
+      </div>
+
+      <div id="deploy-tab-b" role="tabpanel" aria-hidden="true" hidden>
+        <ol style="padding-left: 20px; line-height: 2.4; color: var(--text-secondary);">
+          <li>Log into CAP</li>
+          <li>Start on your <strong style="color: var(--text);">personal team</strong> — no approval needed</li>
+          <li>Create an <strong style="color: var(--text);">Application</strong></li>
+          <li>Run <strong style="color: var(--text);">Quick Start</strong> — it scaffolds the CI/CD pipeline and GitHub connection automatically</li>
+          <li>Deploy to the <strong style="color: var(--text);">dev environment</strong></li>
+        </ol>
+        <div class="callout info" style="margin-top: 16px;">Anyone on the CVS VPN or Zscaler can immediately access your dev URL — no extra steps to share internally.</div>
+      </div>
+
+      <h3 style="margin-top: 32px;">Iterating After Deploy</h3>
+      <ol style="padding-left: 20px; line-height: 2.4; color: var(--text-secondary);">
+        <li>Make changes in VS Code with Claude</li>
+        <li>Tell Claude: <em>"Commit and push my changes to main"</em></li>
+        <li>CAP picks up the new commit automatically via the CI pipeline</li>
+      </ol>
+
+      <h3 style="margin-top: 32px;">Sharing Externally for User Testing</h3>
+      <p>To expose your app to non-CVS users (e.g., patients, customers), you need an Apigee setup and a CAP team review to ensure no PHI is exposed.</p>
+      <div class="callout warn">
+        <strong>Don't skip this step.</strong> Reach out to the CAP team in <code class="il">#community-cap</code> on Slack <em>before</em> attempting to expose any app externally.
+      </div>
+
+      <h3 style="margin-top: 32px;">Getting Help from the CAP Team</h3>
+      <div class="def-card">
+        <h3>#community-cap on Slack</h3>
+        <p>Best way to reach the CAP team. They respond within 15 minutes during business hours. Come with zero infrastructure knowledge — they expect it and love helping. For emergencies they are accessible 24/7.</p>
+      </div>
+      <div class="callout info" style="margin-top: 16px;">
+        <strong>Coming Q2 2026:</strong> GCP Vertex AI access via CAP (Gemini and other GCP models without a separate approval process), plus AWS and Azure dev environments.
+      </div>
+
+      <h3 style="margin-top: 32px;">Key Reminders</h3>
+      <ul class="bl" role="list">
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div>Vibe-coded apps are <strong>POCs only</strong> — partner with your engineers before anything goes to production. The code needs hardening.</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div>You do <strong>not</strong> need to manually configure Artifactory, JFrog, or Kubernetes — these are managed automatically.</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div>CAP reduces infrastructure setup from <strong>months to minutes</strong> for dev environments.</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div>The CAP team is not your development extension — they help with <em>infrastructure</em>, not writing your app code.</div></li>
+      </ul>
     </section>
 
     <!-- KEYBOARD SHORTCUTS -->
@@ -1140,6 +1306,9 @@ brew install --cask google-cloud-sdk</code></pre>
   const sectionToNav = {
     'prerequisites': 'prerequisites',
     'setup': 'setup',
+    'why': 'why',
+    'build': 'build',
+    'deploy': 'deploy',
     'shortcuts': 'shortcuts',
     'definitions': 'definitions',
     'skills': 'skills',
