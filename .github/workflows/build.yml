@@ -1,0 +1,30 @@
+name: Build & Push
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: JFrog Artifactory Login
+        run: |
+          echo ${{ secrets.ARTIFACTORY_TOKEN }} | docker login cvsh.jfrog.io -u ${{ secrets.ARTIFACTORY_USERNAME }} --password-stdin
+
+      - name: Set Docker Image Tag
+        run: echo "tag=${{ github.sha }}" >> $GITHUB_ENV
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t cvsh.jfrog.io/cvsdigital-docker-local/claude-setup-guide:${{ env.tag }} .
+
+      - name: Push Docker image
+        run: |
+          docker push cvsh.jfrog.io/cvsdigital-docker-local/claude-setup-guide:${{ env.tag }}
