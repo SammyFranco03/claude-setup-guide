@@ -1390,25 +1390,151 @@ brew install --cask google-cloud-sdk</code></pre>
 
       const typing = appendMsg('typing', 'Thinking…');
 
-      try {
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: history }),
-        });
-        const data = await res.json();
-        typing.remove();
-
-        const reply = data.reply || data.error || 'Something went wrong — try again.';
-        appendMsg('assistant', reply);
-        history.push({ role: 'assistant', content: reply });
-      } catch {
-        typing.remove();
-        appendMsg('assistant', 'Connection error — please try again.');
-      }
-
+      await new Promise(r => setTimeout(r, 450));
+      typing.remove();
+      const reply = getLocalReply(text);
+      appendMsg('assistant', reply);
+      history.push({ role: 'assistant', content: reply });
       sendBtn.disabled = false;
       input.focus();
+    }
+
+    function getLocalReply(text) {
+      const t = text.toLowerCase();
+      const has = (...words) => words.some(w => t.includes(w));
+
+      // Greetings
+      if (/^(hi|hello|hey|howdy|sup|yo|hiya)[\s!?.]*$/.test(t.trim())) {
+        return "Hi! 👋 I can help with any of the 7 setup steps, troubleshooting errors, or what Claude can do with Figma. What do you need?";
+      }
+
+      // General help
+      if (has('what can you', 'what do you', 'how does this work', 'what is this', 'help')) {
+        return "I can answer questions about:\n\n• The 7 setup steps\n• Prerequisites (admin access, Python, VPN)\n• Troubleshooting error messages\n• What Claude can do with Figma once you're set up\n\nJust ask!";
+      }
+
+      // Prerequisites
+      if (has('prerequisite', 'before i start', 'before the session', 'what do i need', 'requirements', 'need before')) {
+        return "Before the setup session you need:\n\n1. A Mac\n2. Python 3 installed — download from python.org\n3. Admin permissions on your laptop — request at aetna.tuebora.com/home (takes 1–2 days, do it now!)\n4. CVS network or VPN connected (Zscaler or Cisco AnyConnect)";
+      }
+
+      // Admin / permission denied
+      if (has('admin', 'permission denied', 'tuebora', 'request access', 'permission')) {
+        return "You need admin permissions to install software on your laptop.\n\nRequest it here: aetna.tuebora.com/home\n\nIt takes 1–2 days to be approved — request early! If you see \"Permission denied\" during setup, this is why.";
+      }
+
+      // Python
+      if (has('python')) {
+        return "Python 3 is a prerequisite — you won't write any code yourself, the installer just needs it to run behind the scenes. Download from python.org/downloads and install before the setup session.";
+      }
+
+      // VPN / network
+      if (has('vpn', 'zscaler', 'cisco', 'anyconnect', 'network', 'not on vpn')) {
+        return "You need to be on the CVS network or connected to VPN (Zscaler or Cisco AnyConnect) before running the installer. If the installer hangs, check your VPN connection first.";
+      }
+
+      // Step 1 — Install CVS Code
+      if ((has('step 1') || (has('install') && has('cvs', 'cvscode'))) && !has('command not found', 'not found')) {
+        return "Step 1 — Install CVS Code:\n\nOpen your Mac's Terminal and run:\ncurl -fsSL https://cvscode.prod.cvshealth.com/download/cvscode/install.sh | bash\n\nMust be on CVS network or VPN first. Use your Mac's Terminal app — not VS Code's built-in terminal.";
+      }
+
+      // Step 2 — PATH
+      if (has('step 2') || (has('path') && has('update', 'export', 'zshrc')) || (has('cvscode') && has('command not found', 'not found', 'not working'))) {
+        return "Step 2 — Update your PATH:\n\nRun this in Terminal:\necho 'export PATH=\"$HOME/.local/bin:$PATH\"' >> ~/.zshrc\n\nThen press ⌘Cmd + Q to fully quit Terminal, reopen it, and run:\ncvscode --version\n\nYou should see a version number.";
+      }
+
+      // Step 3 — Environment setup
+      if (has('step 3') || (has('environment') && has('setup', 'set up')) || has('set up my development', 'development environment')) {
+        return "Step 3 — Run the environment setup:\n\nIn Terminal, type cvscode to open it. Then type:\nSet up my development environment\n\nThis takes 15–30 minutes — grab a coffee! Retry cycles are totally normal, just let it run and don't close the terminal.";
+      }
+
+      // Step 4 — Skill sync & launch
+      if (has('step 4') || has('skill-sync', 'skill sync', '/skill-sync') || (has('launch') && has('claude'))) {
+        return "Step 4 — Sync skills & launch Claude:\n\nInside CVS Code, run:\n/skill-sync\n\nThen launch Claude Code:\nlaunch claude\n\nClaude's interface should appear — you're in!";
+      }
+
+      // Step 5 — Add Figma MCP
+      if (has('step 5') || has('mcp add') || (has('add') && has('figma') && !has('not connect', 'error', 'fail', 'broken'))) {
+        return "Step 5 — Add the Figma MCP server:\n\nRun this in Terminal:\nclaude mcp add --transport http figma https://mcp.figma.com/mcp\n\nThat's it — one command and Figma is connected to Claude!";
+      }
+
+      // Step 6 — Authenticate Figma
+      if (has('step 6') || (has('figma') && has('authenticate', 'sign in', 'log in', 'login', 'authorize', 'browser'))) {
+        return "Step 6 — Authenticate with Figma:\n\nThe first time you use a Figma command, Claude opens your browser and asks you to sign into Figma. Just log in and click Allow — this only happens once!\n\nMake sure you're already logged into Figma in your default browser.";
+      }
+
+      // Step 7 — Plugin
+      if (has('step 7') || has('/plugins') || (has('plugin') && has('enable', 'figma'))) {
+        return "Step 7 — Enable the Figma plugin:\n\nWhile Claude is running, type:\n/plugins\n\nFind figma in the list and enable it. That's everything — you're all set!";
+      }
+
+      // How to restart Claude
+      if (has('start again', 'restart', 'reopen', 'open claude again', 'start claude', 'next time', 'later')) {
+        return "To start Claude again later, open Terminal and run:\ncd ~/Desktop/MCP && claude\n\nFirst command goes to your MCP folder, second launches Claude with Figma connected.";
+      }
+
+      // Error: claude command not found
+      if (has('claude') && has('command not found', 'not found', 'not installed', 'not working')) {
+        return "\"claude: command not found\" — Claude Code didn't install correctly.\n\nFix:\n1. brew install node\n2. npm install -g @anthropic-ai/claude-code\n\nThen close and reopen Terminal.\n\nDon't have Homebrew? Ask me \"how do I install Homebrew\" first.";
+      }
+
+      // Homebrew
+      if (has('homebrew', 'brew install', 'brew', 'how do i install homebrew')) {
+        return "Homebrew is Terminal's app store. To install it, paste this into Terminal:\n/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"\n\nThen close and reopen Terminal. After that, brew install node and brew install python will work.";
+      }
+
+      // Installer hangs / stuck
+      if (has('hang', 'stuck', 'frozen', 'not responding', 'fail', 'failed', 'forever', 'not finishing')) {
+        return "If the installer hangs or fails:\n\n1. Check your VPN is on (Zscaler or Cisco AnyConnect)\n2. Press ⌘Cmd + Q to fully quit Terminal\n3. Reopen Terminal and run the install command again\n\nRetry cycles are normal — if it's still running, leave it alone!";
+      }
+
+      // Figma MCP not connecting / error
+      if (has('figma') && has('not connect', 'not working', 'error', 'broken', "doesn't work", 'fail', 'can\'t')) {
+        return "If Figma MCP isn't connecting:\n\n1. Type /exit to quit Claude\n2. Type claude to restart\n3. Type /mcp to check server status\n\nMake sure Step 5 was run correctly:\nclaude mcp add --transport http figma https://mcp.figma.com/mcp";
+      }
+
+      // What Claude can do with Figma
+      if ((has('what can', 'what does', 'can claude', 'able to', 'feature', 'capabilities', 'example')) && has('figma', 'claude', 'design')) {
+        return "Once set up, Claude + Figma can:\n\n🎨 Design\n• Read & describe any Figma design from a URL\n• Generate React, HTML/CSS, or Vue code from components\n• Screenshot components\n• Build design systems & color tokens\n• Audit designs for accessibility\n\n📊 Diagrams (in FigJam)\n• User flow diagrams\n• Journey maps\n• Sitemaps & IA diagrams\n• Decision trees\n\n📝 UX Research\n• Analyze interview/research notes\n• Write UX copy & microcopy\n• Create research plans";
+      }
+
+      // Code generation
+      if (has('code', 'react', 'html', 'css', 'vue', 'generate code', 'implement design')) {
+        return "Claude can generate code from your Figma designs! Paste a Figma URL and ask:\n\n\"Implement this design as a React component: [Figma URL]\"\nor\n\"Generate HTML/CSS for this component: [Figma URL]\"\n\nWorks with React, HTML/CSS, Vue, and more.";
+      }
+
+      // Diagrams / FigJam
+      if (has('journey map', 'user flow', 'sitemap', 'diagram', 'figjam', 'flowchart', 'decision tree')) {
+        return "Claude can create diagrams in FigJam! Just describe what you need:\n\n• \"Create a user flow diagram for the checkout process\"\n• \"Create a journey map for a patient scheduling an appointment\"\n• \"Create a sitemap for our pharmacy app\"\n• \"Create a decision tree for prescription eligibility\"\n\nPaste the FigJam URL and Claude will add the diagram directly.";
+      }
+
+      // Accessibility
+      if (has('accessibility', 'a11y', 'wcag', 'contrast', 'audit')) {
+        return "Claude can audit Figma designs for accessibility! Ask:\n\n\"Check this design for accessibility issues: [Figma URL]\"\n\nIt checks color contrast, text sizing, touch targets, and WCAG compliance.";
+      }
+
+      // UX writing / copy
+      if (has('ux copy', 'microcopy', 'error message', 'writing', 'content', 'copy')) {
+        return "Claude can write UX copy! Examples:\n\n• \"Write 3 versions of an error message when a prescription can't be refilled\"\n• \"Write onboarding copy for our new app\"\n• \"Write button label options for a checkout CTA\"\n\nJust describe what you need in plain English.";
+      }
+
+      // How long / time estimates
+      if (has('how long', 'time', 'minutes', 'hours', 'how much time')) {
+        return "Time estimates:\n\nStep 1 – Install CVS Code: ~5 min\nStep 2 – Update PATH: ~2 min\nStep 3 – Environment setup: 15–30 min ← the long one\nStep 4 – Skill sync & launch: ~2 min\nStep 5 – Add Figma MCP: ~1 min\nStep 6 – Authenticate Figma: ~1 min\nStep 7 – Enable plugin: ~1 min\n\nTotal: ~45–60 minutes end to end.";
+      }
+
+      // Thanks / done
+      if (has('thank', 'thanks', 'thx', 'ty', 'perfect', 'great', 'awesome', 'got it', 'helpful')) {
+        return "Happy to help! Good luck with the setup. If anything comes up, just ask. 👍";
+      }
+
+      // Success / working
+      if (has('done', 'finished', 'complete', 'all set', 'it works', 'working now')) {
+        return "That's great! 🎉 To start Claude again later:\ncd ~/Desktop/MCP && claude\n\nThen paste any Figma URL and ask Claude to analyze, generate code, or create diagrams. Have fun!";
+      }
+
+      // Fallback
+      return "I'm not sure I have a specific answer for that. Here's what I can help with:\n\n• Setup steps 1–7\n• Prerequisites (admin access, Python, VPN)\n• Troubleshooting error messages\n• What Claude can do with Figma\n\nOr reach out to Samantha at samantha.franco@cvshealth.com for help!";
     }
 
     sendBtn.addEventListener('click', send);
