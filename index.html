@@ -799,13 +799,26 @@ and has only had one appointment in the past year.</code></pre>
     <!-- DEPLOY TO CAP -->
     <section class="section" id="deploy">
       <h2>Deploy to CAP</h2>
-      <p>CAP (Cloud Application Platform) deploys your app to a real cloud environment so you can share a link. It's available to all CVS Health employees from day one — no ServiceNow tickets, no email approvals.</p>
+      <p>CAP (Cloud Application Platform) deploys your app to a real cloud environment so you can share a link. It's available to all CVS Health employees from day one — no ServiceNow tickets, no email approvals needed for <strong>dev</strong>.</p>
+
+      <div class="cards" style="margin: 20px 0;">
+        <div class="card">
+          <h4>CAP Platform</h4>
+          <p>Log in and deploy your app. Available to everyone at CVS Health from day one.</p>
+          <div class="code-block" style="margin-top: 10px;"><pre><code style="font-size:12px;"><a href="https://cap-ui.prod.platform.cvshealth.com/" style="color: var(--accent);">cap-ui.prod.platform.cvshealth.com</a></code></pre></div>
+        </div>
+        <div class="card">
+          <h4>CAP Documentation</h4>
+          <p>Full getting-started guide including production deployment requirements.</p>
+          <div class="code-block" style="margin-top: 10px;"><pre><code style="font-size:12px;"><a href="https://cap-docs.prod.cvshealth.com/getting-started/production/" style="color: var(--accent);">cap-docs.prod.cvshealth.com</a></code></pre></div>
+        </div>
+      </div>
 
       <h3>Prerequisites for Deployment</h3>
       <ul class="bl" role="list">
         <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>GitHub Enterprise access</strong> — your code must live in CVS's GitHub Enterprise instance</div></li>
         <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>A containerized app with CI/CD</strong> — use CAP's Quick Start to scaffold this automatically (you don't need to know what that means)</div></li>
-        <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>A CAP login</strong> — go to the CAP URL and verify you have access; everyone does from day one</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>A CAP login</strong> — <a href="https://cap-ui.prod.platform.cvshealth.com/" style="color: var(--accent);">log in here</a> to verify you have access; everyone does from day one</div></li>
       </ul>
 
       <h3 style="margin-top: 32px;">How to Deploy</h3>
@@ -826,13 +839,84 @@ Here is the latest commit hash: [hash]</code></pre>
 
       <div id="deploy-tab-b" role="tabpanel" aria-hidden="true" hidden>
         <ol style="padding-left: 20px; line-height: 2.4; color: var(--text-secondary);">
-          <li>Log into CAP</li>
+          <li><a href="https://cap-ui.prod.platform.cvshealth.com/" style="color: var(--accent);">Log into CAP</a></li>
           <li>Start on your <strong style="color: var(--text);">personal team</strong> — no approval needed</li>
           <li>Create an <strong style="color: var(--text);">Application</strong></li>
           <li>Run <strong style="color: var(--text);">Quick Start</strong> — it scaffolds the CI/CD pipeline and GitHub connection automatically</li>
           <li>Deploy to the <strong style="color: var(--text);">dev environment</strong></li>
         </ol>
         <div class="callout info" style="margin-top: 16px;">Anyone on the CVS VPN or Zscaler can immediately access your dev URL — no extra steps to share internally.</div>
+      </div>
+
+      <h3 style="margin-top: 32px;">What You Need to Do Before Deploying</h3>
+      <p>Here's a checklist of the actual steps required before your first CAP deployment — some take a day or more, so start early.</p>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="acc-cap-1" onclick="toggleAcc(this)">
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+          <span>Step 1 — Get GitHub Enterprise access</span>
+        </button>
+        <div class="acc-body" id="acc-cap-1" hidden>
+          <p>All source code at CVS Health lives in GitHub Enterprise. Request access through AccessNow if you don't already have it. This is the foundation everything else depends on.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="acc-cap-2" onclick="toggleAcc(this)">
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+          <span>Step 2 — Log into CAP and explore the UI</span>
+        </button>
+        <div class="acc-body" id="acc-cap-2" hidden>
+          <p>Visit <a href="https://cap-ui.prod.platform.cvshealth.com/" style="color: var(--accent);">cap-ui.prod.platform.cvshealth.com</a> — you already have access. Familiarize yourself with the dashboard. Start with your personal team to create a test app and run Quick Start. No approvals needed for the dev environment.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="acc-cap-3" onclick="toggleAcc(this)">
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+          <span>Step 3 — Create a shared team (for collaboration)</span>
+        </button>
+        <div class="acc-body" id="acc-cap-3" hidden>
+          <p>If you want your whole product team (designers, product, engineers) to access and deploy your app, create a <strong>shared team</strong> in CAP. You can assign owners, members, and viewers. Members and owners can deploy; viewers can see the status.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="acc-cap-4" onclick="toggleAcc(this)">
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+          <span>Step 4 — Set up your app with Quick Start</span>
+        </button>
+        <div class="acc-body" id="acc-cap-4" hidden>
+          <p>In CAP, create an Application then run <strong>Quick Start</strong>. It scaffolds your CI/CD pipeline, links your GitHub repo, and sets up everything needed to deploy containers — automatically. You don't need to configure Kubernetes, Artifactory, or Docker yourself.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="acc-cap-5" onclick="toggleAcc(this)">
+          <span class="acc-arrow" aria-hidden="true">▶</span>
+          <span>Step 5 — Production deployments (additional requirements)</span>
+        </button>
+        <div class="acc-body" id="acc-cap-5" hidden>
+          <p>Dev deployments are frictionless. <strong>Production deployments</strong> require additional steps. See the full <a href="https://cap-docs.prod.cvshealth.com/getting-started/production/" style="color: var(--accent);">production getting-started docs</a> for details. Key requirements:</p>
+          <ul class="bl" role="list" style="margin-top: 12px;">
+            <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>Approved Change (CNG)</strong> in ServiceNow required for every production deployment</div></li>
+            <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>External ID</strong> aligned with a CVS Health Business Application ID (APM)</div></li>
+            <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>Assignment Group</strong> — create one in ServiceNow with your team members; all members need <code class="il">SN_PROD_ITIL</code> entitlement (request via AccessNow)</div></li>
+            <li role="listitem"><span class="dot" aria-hidden="true"></span><div><strong>Change approval</strong> — allow 1–7 business days; escalate if no response after 1 day</div></li>
+          </ul>
+          <div class="callout warn" style="margin-top: 12px;">
+            <strong>For POCs and user testing</strong>, stick to the <strong>dev environment</strong> — it has none of these requirements. Only move to production when engineering is ready to productionize the app.
+          </div>
+          <p style="margin-top: 12px;"><strong>Production deploy steps (once approved):</strong></p>
+          <ol style="padding-left: 20px; line-height: 2.2; color: var(--text-secondary);">
+            <li>Click "Run a Deployment" on your CAP service home page</li>
+            <li>Select your deployment tag and add a memo (include the CNG number)</li>
+            <li>Review configuration changes in the preview modal</li>
+            <li>Select "Deploy Candidate" and monitor the pipeline</li>
+            <li>Verify success through testing</li>
+            <li>Close the change in ServiceNow</li>
+          </ol>
+        </div>
       </div>
 
       <h3 style="margin-top: 32px;">Iterating After Deploy</h3>
@@ -1240,7 +1324,8 @@ brew install --cask google-cloud-sdk</code></pre>
   </div><!-- .container -->
 
   <footer>
-    <p>Full install docs: <a href="https://cvscode.prod.cvshealth.com/install">cvscode.prod.cvshealth.com/install</a></p>
+    <p>CVS Code install docs: <a href="https://cvscode.prod.cvshealth.com/install">cvscode.prod.cvshealth.com/install</a></p>
+    <p style="margin-top: 6px;">CAP Platform: <a href="https://cap-ui.prod.platform.cvshealth.com/">cap-ui.prod.platform.cvshealth.com</a> · CAP Docs: <a href="https://cap-docs.prod.cvshealth.com/getting-started/production/">cap-docs.prod.cvshealth.com</a></p>
     <p style="margin-top: 12px;"><strong style="color: var(--text);">Stuck or have questions?</strong></p>
     <p style="margin-top: 4px;">Message Samantha on <strong style="color: var(--text);">Teams</strong> or <strong style="color: var(--text);">Slack</strong>, or email <a href="mailto:samantha.franco@cvshealth.com">samantha.franco@cvshealth.com</a></p>
   </footer>
