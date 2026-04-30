@@ -1001,6 +1001,28 @@ Here is the latest commit hash: [hash]</code></pre>
       <div class="def-card"><h3>CVS Code (cvscode)</h3><p>Our company's custom installer and wrapper. It handles all the complicated setup so you don't have to do it manually. Think of it as the "setup wizard" for getting Claude running at CVS Health.</p></div>
       <div class="def-card"><h3>PATH</h3><p>A list of folders where your computer looks for commands. When you type <code class="il">claude</code> in Terminal, your computer checks the PATH to figure out where that program lives. We add one folder to this list during setup.</p></div>
       <div class="def-card"><h3>VPN</h3><p>Virtual Private Network — the Zscaler or Cisco app you use to connect to the CVS network when working remotely. The installer needs it to reach CVS servers.</p></div>
+
+      <div class="def-card"><h3>CAP — Cloud Application Platform</h3><p>CVS Health's internal platform for deploying apps to the cloud. Think of it like a managed hosting service — you give it your code and it runs your app in a real cloud environment, generates a shareable URL, and handles all the infrastructure behind the scenes. Available to every CVS Health employee from day one, no tickets required for the dev environment. <a href="https://cap-ui.prod.platform.cvshealth.com/" style="color: var(--accent);">Open CAP →</a></p></div>
+
+      <div class="def-card"><h3>Artifactory / JFrog</h3><p>A storage system for packaged, security-scanned app code. When you deploy via CAP, your app gets automatically packaged into a "container image" and stored in Artifactory. You never interact with it directly — the CI/CD pipeline does this for you. If Claude tells you to manually set up a JFrog account or push something to Artifactory, stop — that's not how it works here.</p></div>
+
+      <div class="def-card"><h3>Container / Containerized App</h3><p>A self-contained package of your app and everything it needs to run — like a shipping container for software. CAP deploys containers. You don't need to build one yourself; CAP's Quick Start sets it up automatically when you connect your GitHub repo. Think of it as boxing up your app so it runs the same way everywhere.</p></div>
+
+      <div class="def-card"><h3>CI/CD Pipeline</h3><p>Continuous Integration / Continuous Deployment — an automated process that takes your code from GitHub, runs security checks, packages it, and deploys it to CAP whenever you push a new commit. You set it up once with CAP's Quick Start, and after that every push to GitHub triggers it automatically. You don't run it manually.</p></div>
+
+      <div class="def-card"><h3>Hyperion Gateway</h3><p>CVS Health's internal API gateway for connecting to Claude (Anthropic's AI). Instead of creating your own API key with Anthropic directly, you route requests through Hyperion Gateway — it handles authentication and generates a key for you. This is the approved, secure way to power AI features inside your CVS apps. Find the URL and key in User Settings → settings.json inside CVS Code.</p></div>
+
+      <div class="def-card"><h3>GitHub Enterprise</h3><p>CVS Health's internal version of GitHub — a platform for storing and versioning source code. All code that gets deployed through CAP must live in GitHub Enterprise. If you're vibe coding with Claude, the generated code needs to be committed and pushed here before CAP can deploy it. Different from github.com — this is an internal, company-managed instance.</p></div>
+
+      <div class="def-card"><h3>Apigee</h3><p>CVS Health's API gateway for exposing apps to users outside the CVS network (e.g., patients, customers). If you deploy to CAP and only need internal users (colleagues on VPN), you don't need Apigee. If you want external users to access your app for user testing, you'll need to work with the CAP team to set up Apigee and ensure no PHI is exposed.</p></div>
+
+      <div class="def-card"><h3>Kubernetes</h3><p>The infrastructure technology that CAP uses behind the scenes to run your containers in the cloud. You never interact with Kubernetes directly — the CAP team manages it for you. It's mentioned sometimes in error messages or documentation, but as a designer or non-engineer you can ignore it entirely.</p></div>
+
+      <div class="def-card"><h3>ServiceNow</h3><p>CVS Health's IT service management platform — used for submitting requests, tracking changes, and getting approvals. For CAP dev deployments you don't need it at all. For production deployments, you'll need to create a Change (CNG) in ServiceNow for every release and have it approved before deploying. Also used to request the <code class="il">SN_PROD_ITIL</code> entitlement for team members.</p></div>
+
+      <div class="def-card"><h3>AccessNow</h3><p>CVS Health's system for requesting access to tools and entitlements — like GitHub Enterprise, production permissions, or the <code class="il">SN_PROD_ITIL</code> entitlement required for production CAP deployments. If you hit a "permission denied" error on any CVS tool, AccessNow is usually where you go to request it.</p></div>
+
+      <div class="def-card"><h3>GCP / Vertex AI</h3><p>Google Cloud Platform is one of the cloud providers that CAP deploys to (currently GCP; AWS and Azure coming later in 2026). Vertex AI is Google's platform for running AI models — including Gemini. CAP is adding direct Vertex AI access in Q2 2026, which will let you connect your POC to Gemini and other GCP-hosted models without a separate approval process.</p></div>
     </section>
 
     <!-- WHAT YOU CAN DO -->
