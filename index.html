@@ -535,6 +535,7 @@
 
   <div class="nav-group-label">Get Started</div>
   <a href="#prerequisites" class="nav-link">Prerequisites</a>
+  <a href="#admin" class="nav-link">Admin Access</a>
   <a href="#setup" class="nav-link">Setup Guide</a>
 
   <div class="nav-group-label">Build a POC</div>
@@ -575,6 +576,34 @@
       </ul>
       <div class="callout warn">
         <strong>Don't skip the admin request!</strong> Without admin permissions, the installer will fail. <a href="https://aetna.tuebora.com/home" style="color: var(--red); text-decoration: underline;">Request admin access here</a> now so it's approved by the session. If you're not sure whether you have admin access, try installing any app — if it asks for a password you don't have, you need to request it.
+      </div>
+    </section>
+
+    <!-- ADMIN ACCESS -->
+    <section class="section" id="admin">
+      <h2>Requesting Admin Privileges</h2>
+      <p>Some installation steps require local admin access on your Mac. Here's how to request it — <strong>do this early</strong>, as approval can take 1–2 days.</p>
+
+      <h3>Requesting Mac local admin via AccessNow</h3>
+      <p>According to the <em>Mac Admin Access</em> article in ServiceNow, admin access is requested through <strong>AccessNow</strong>:</p>
+      <ol style="padding-left: 22px; color: var(--text-secondary); line-height: 2;">
+        <li>Go to <strong>AccessNow</strong> and sign in.</li>
+        <li>Click <strong>Manage Access</strong> (upper right).</li>
+        <li>Set <strong>Request Type</strong> to <strong>Add Access</strong>.</li>
+        <li>Select the appropriate user in <strong>User Selection</strong>.</li>
+        <li>Under <strong>Access Selection</strong>, choose to select entitlements, search for <code class="il">CLGRP-AAD-MacAdmin-Users</code>, and add it.</li>
+        <li>Provide your business justification and submit.</li>
+      </ol>
+
+      <h3>Checking out admin rights temporarily</h3>
+      <p>After your request is approved, you can temporarily "check out" admin rights via <strong>Jamf Connect</strong> (typically for 30 minutes) from the menu bar:</p>
+      <ul class="bl" role="list">
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div>Click the Jamf Connect icon in your Mac menu bar and choose <strong>Request Admin Privileges</strong>.</div></li>
+        <li role="listitem"><span class="dot" aria-hidden="true"></span><div>When you're done installing, choose <strong>End Admin Privileges</strong> from the same menu.</div></li>
+      </ul>
+
+      <div class="callout warn">
+        <strong>Don't have Jamf Connect?</strong> If you don't see it in your menu bar, your machine may not be enrolled in Jamf. Reach out to IT to get enrolled before requesting admin access.
       </div>
     </section>
 
@@ -1412,6 +1441,7 @@ brew install --cask google-cloud-sdk</code></pre>
 
   const sectionToNav = {
     'prerequisites': 'prerequisites',
+    'admin': 'admin',
     'setup': 'setup',
     'why': 'why',
     'build': 'build',
